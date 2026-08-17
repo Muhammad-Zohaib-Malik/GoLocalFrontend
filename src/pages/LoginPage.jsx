@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import axiosClient from "../api/axiosClient";
 import authImage from "../assets/event_auth_image.png";
+import { UserContext } from "../UserContext";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,12 +22,15 @@ const SignIn = () => {
 
     try {
       setLoading(true);
-      const response = await axiosClient.post("/users/loginUser", user, {
-        headers: { "ngrok-skip-browser-warning": "69420" },
-      });
+      const response = await axiosClient.post("/users/loginUser", user);
 
       const data = response.data;
       console.log("User signed in successfully:", data);
+      
+      if (setUser) {
+        setUser(data?.data?.user || data?.data || data?.user || null);
+      }
+      
       navigate("/home");
     } catch (error) {
       console.log("Request failed:", error);
@@ -196,3 +201,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+

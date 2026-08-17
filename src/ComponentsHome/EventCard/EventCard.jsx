@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RiStarFill, RiMapPinLine } from "react-icons/ri";
 import { FaCheckCircle, FaCalendarAlt } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
+import { UserContext } from "../../UserContext";
 
 const EventCard = ({ event, onPublish, onFeature, onDelete, onUpdate }) => {
   const {
@@ -22,7 +23,8 @@ const EventCard = ({ event, onPublish, onFeature, onDelete, onUpdate }) => {
   } = event;
 
   const navigate = useNavigate();
-  const userRole = localStorage.getItem("role");
+  const { user } = useContext(UserContext);
+  const userRole = user?.role;
 
   const categoryTranslations = {
     Música: "Music",

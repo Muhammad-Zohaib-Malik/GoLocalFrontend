@@ -1,36 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 const Wallet = () => {
   const location = useLocation();
   const [payments, setPayments] = useState([]);
-  const roleStr = localStorage.getItem("role");
-  const isAuthenticated =
-    roleStr && roleStr !== "undefined" && roleStr !== "null";
-  const [user, setUser] = useState(null);
+  const { user } = useContext(UserContext);
 
-  const fetchUser = async () => {
-    if (isAuthenticated) {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/getUser`,
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420",
-            },
-          },
-        );
-        setUser(response.data.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, [isAuthenticated]);
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -39,7 +16,7 @@ const Wallet = () => {
           `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/booking/getuserbooking?user_id=${user?._id}`,
           {
             headers: {
-              "ngrok-skip-browser-warning": "69420",
+              
             },
           },
         );
@@ -153,3 +130,4 @@ const Wallet = () => {
 };
 
 export default Wallet;
+

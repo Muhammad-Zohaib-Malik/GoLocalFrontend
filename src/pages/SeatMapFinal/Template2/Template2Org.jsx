@@ -94,7 +94,7 @@ const SeatMapPage = ({ formData, gallery, template }) => {
         {
           headers: {
             "Content-Type": "multipart/form-data", // Adjust header for FormData
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -218,3 +218,4 @@ const SeatMapPage = ({ formData, gallery, template }) => {
 };
 
 export default SeatMapPage;
+

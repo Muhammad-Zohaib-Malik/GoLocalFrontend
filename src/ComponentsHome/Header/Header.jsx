@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/mylogooo.png";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -6,6 +6,7 @@ import { BsFillCaretDownFill } from "react-icons/bs";
 import { RxExit } from "react-icons/rx";
 import axios from "axios";
 import axiosClient from "../../api/axiosClient";
+import { UserContext } from "../../UserContext";
 
 const nav__links = [
   { path: "/home", display: "Home" },
@@ -17,16 +18,15 @@ const nav__links = [
 ];
 
 const Header = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return document.cookie.includes("accessToken=");
-  });
+  const { user, setUser } = useContext(UserContext);
+  const isAuthenticated = !!user;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [user, setUser] = useState(null);
+
 
   const dropdownRef = useRef(null);
 
@@ -51,27 +51,7 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const fetchUser = async (currentAuthStatus) => {
-    if (currentAuthStatus) {
-      try {
-        const response = await axiosClient.get("/users/getUser", {
-          headers: {
-            "ngrok-skip-browser-warning": "69420",
-          },
-        });
-        setUser(response.data.data);
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          localStorage.clear();
-          setIsAuthenticated(false);
-        } else {
-          console.error("Error fetching user:", error);
-        }
-      }
-    } else {
-      setUser(null);
-    }
-  };
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -85,11 +65,6 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    // Re-evaluate on navigation if needed
-    const isAuth = document.cookie.includes("accessToken=");
-    setIsAuthenticated(isAuth);
-
-    fetchUser(isAuth);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location]);
@@ -101,7 +76,7 @@ const Header = () => {
         {},
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -109,7 +84,6 @@ const Header = () => {
       console.error("Logout failed:", err);
     }
     localStorage.clear();
-    setIsAuthenticated(false);
     setUser(null);
     navigate("/login");
   };
@@ -254,3 +228,4 @@ const Header = () => {
 };
 
 export default Header;
+

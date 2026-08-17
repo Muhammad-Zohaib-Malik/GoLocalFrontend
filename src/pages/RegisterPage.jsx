@@ -32,9 +32,7 @@ const SignUp = () => {
     try {
       setLoading(true);
 
-      const response = await axiosClient.post("/users/createUser", user, {
-        headers: { "ngrok-skip-browser-warning": "69420" },
-      });
+      const response = await axiosClient.post("/users/createUser", user);
 
       console.log("User created successfully:", response.data);
       navigate("/login");
@@ -306,3 +304,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

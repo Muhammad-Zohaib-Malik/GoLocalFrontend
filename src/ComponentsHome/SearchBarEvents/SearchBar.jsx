@@ -21,7 +21,7 @@ const SearchBar = ({ setEvents }) => {
         `${BASE_URL}/api/v1/events/getAllEvents`,
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -46,7 +46,7 @@ const SearchBar = ({ setEvents }) => {
         `${BASE_URL}/api/v1/events/search/getEventBySearch?name=${value}`,
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -92,7 +92,7 @@ const SearchBar = ({ setEvents }) => {
         `${BASE_URL}/api/v1/events/search/getEventBySearch?${queryParams.toString()}`,
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -225,3 +225,4 @@ const SearchBar = ({ setEvents }) => {
 };
 
 export default SearchBar;
+

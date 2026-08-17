@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Layout from "./ComponentsHome/Layout/Layout";
+import { UserContextProvider } from "./UserContext";
 
 // Pages
 import Login from "./pages/LoginPage";
@@ -92,10 +93,10 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <>
+    <UserContextProvider>
       <RouterProvider router={router} />
       <Toaster position="top-right" />
-    </>
+    </UserContextProvider>
   );
 };
 

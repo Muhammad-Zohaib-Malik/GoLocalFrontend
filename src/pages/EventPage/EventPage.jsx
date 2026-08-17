@@ -32,7 +32,7 @@ export default function EventPage() {
       try {
         const response = await axios.get(url, {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         });
         setEventData(response.data.data);
@@ -73,7 +73,7 @@ export default function EventPage() {
             `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/booking/geteventbooking?event_id=${eventData._id}`,
             {
               headers: {
-                "ngrok-skip-browser-warning": "69420",
+                
               },
             },
           );
@@ -333,3 +333,4 @@ export default function EventPage() {
     </>
   );
 }
+

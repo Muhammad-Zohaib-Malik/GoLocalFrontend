@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { useLocation, Outlet } from "react-router-dom";
 
+import { useLocation, Outlet } from "react-router-dom";
+import { UserContext } from "../../UserContext";
+
 const Layout = () => {
+  const { user } = useContext(UserContext);
   const location = useLocation();
 
   const isTemplateRoute =
@@ -15,7 +19,7 @@ const Layout = () => {
 
   const isHomeWithHero =
     (location.pathname === "/home" || location.pathname === "/") &&
-    (!localStorage.getItem("role") || localStorage.getItem("role") === "user");
+    (!user || user?.role === "user");
   const isEventsPage = location.pathname === "/events";
   const isAboutPage = location.pathname === "/about";
   const isWalkInPage = location.pathname === "/walk-in-events";

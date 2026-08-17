@@ -18,7 +18,7 @@ const WalkIn = () => {
       try {
         const response = await axios.get(url, {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         });
         setEvents(response.data.data);
@@ -83,3 +83,4 @@ const WalkIn = () => {
 };
 
 export default WalkIn;
+

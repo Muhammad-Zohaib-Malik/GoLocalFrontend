@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import HeroSection from "../ComponentsHome/HeroSection/HeroSection.jsx";
 import HighlightSection from "../ComponentsHome/HighlightSection/HighlightSection.jsx";
 import Subtitle from "../ComponentsHome/Subtitle/Subtitle.jsx";
@@ -12,40 +12,18 @@ import EventCategories from "../ComponentsHome/EventsCategories/EventCategories.
 import axios from "axios";
 import FeaturedEventsList from "../ComponentsHome/FeaturedEvents/FeaturedEventsList.jsx";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen.jsx";
+import { UserContext } from "../UserContext";
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const { user, isLoading } = useContext(UserContext);
 
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
     window.scrollTo(0, 0);
   }, []);
 
-  const fetchUser = async () => {
-    const roleStr = localStorage.getItem("role");
-    const isAuthenticated =
-      roleStr && roleStr !== "undefined" && roleStr !== "null";
-    if (isAuthenticated) {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/getUser`,
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420",
-            },
-          },
-        );
-        setUser(response.data.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    }
-  };
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
 
   // GSAP Scroll Animations
   import("gsap").then((gsapModule) => {
@@ -83,7 +61,8 @@ const Home = () => {
 
   useEffect(() => {
     const fetchAllEvents = async () => {
-      const userRole = localStorage.getItem("role");
+      if (isLoading) return; // Wait until we know the user's role
+      const userRole = user?.role;
 
       // if (!token) {
       // console.error("No token found, please login.");
@@ -99,7 +78,7 @@ const Home = () => {
       try {
         const response = await axios.get(url, {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         });
         setEvents(response.data.data);
@@ -111,7 +90,7 @@ const Home = () => {
     };
 
     fetchAllEvents();
-  }, []);
+  }, [user?.role, isLoading]);
 
   // Render loader or main content
   if (loading) {
@@ -183,3 +162,4 @@ const Home = () => {
 };
 
 export default Home;
+

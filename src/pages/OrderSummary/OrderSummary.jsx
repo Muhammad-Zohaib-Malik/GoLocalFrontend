@@ -1,20 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaMoneyBillWave, FaChair } from "react-icons/fa";
 
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
+import { UserContext } from "../../UserContext";
 
 export default function OrderSummary() {
   const location = useLocation();
   const navigate = useNavigate();
   const { payload } = location.state;
-  const [user, setUser] = useState(null);
-
-  const roleStr = localStorage.getItem("role");
-  const isAuthenticated =
-    roleStr && roleStr !== "undefined" && roleStr !== "null";
+  const { user } = useContext(UserContext);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -22,31 +19,9 @@ export default function OrderSummary() {
     setIsCheckboxChecked(e.target.checked);
   };
 
-  const fetchUser = async () => {
-    if (isAuthenticated) {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/getUser`,
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420",
-            },
-          },
-        );
-        setUser(response.data.data);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    }
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    fetchUser();
-  }, [isAuthenticated]);
 
   const handleConfirmBooking = async () => {
     console.log(user?._id, payload?.event_id);
@@ -67,7 +42,7 @@ export default function OrderSummary() {
         payloadData,
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -221,3 +196,4 @@ export default function OrderSummary() {
     </div>
   );
 }
+

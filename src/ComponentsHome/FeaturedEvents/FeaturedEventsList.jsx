@@ -1,12 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import EventCard from "../EventCard/EventCard";
 import axios from "axios";
 import Swal from "sweetalert2";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { UserContext } from "../../UserContext";
 
 const FeaturedEventsList = ({ events, loading, setEvents }) => {
-  const userRole = localStorage.getItem("role");
+  const { user } = useContext(UserContext);
+  const userRole = user?.role;
   const [selectedTab, setSelectedTab] = useState(0);
 
   const [open, setOpen] = useState(false);
@@ -19,7 +21,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getAllEvents`,
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -36,7 +38,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
         { eventId },
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -53,7 +55,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
         { eventId },
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -91,7 +93,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
         payload,
         {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         },
       );
@@ -120,7 +122,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
           `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/deleteEvent?id=${eventId}`,
           {
             headers: {
-              "ngrok-skip-browser-warning": "69420",
+              
             },
           },
         );
@@ -498,3 +500,4 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
 };
 
 export default FeaturedEventsList;
+

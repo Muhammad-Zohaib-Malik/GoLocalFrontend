@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SearchBar from "../ComponentsHome/SearchBarEvents/SearchBar";
 import FeaturedEventsList from "../ComponentsHome/FeaturedEvents/FeaturedEventsList";
 import axios from "axios";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
+import { UserContext } from "../UserContext";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user, isLoading } = useContext(UserContext);
 
   useEffect(() => {
     // Scroll to the top of the page when the component mounts
@@ -15,7 +17,8 @@ const Events = () => {
 
   useEffect(() => {
     const fetchAllEvents = async () => {
-      const userRole = localStorage.getItem("role");
+      if (isLoading) return;
+      const userRole = user?.role;
 
       // Determine the appropriate URL based on the user role
       const url =
@@ -25,7 +28,7 @@ const Events = () => {
       try {
         const response = await axios.get(url, {
           headers: {
-            "ngrok-skip-browser-warning": "69420",
+            
           },
         });
         setEvents(response.data.data);
@@ -37,7 +40,7 @@ const Events = () => {
     };
 
     fetchAllEvents();
-  }, []);
+  }, [user?.role, isLoading]);
 
   return (
     <div>
@@ -73,3 +76,4 @@ const Events = () => {
 };
 
 export default Events;
+
