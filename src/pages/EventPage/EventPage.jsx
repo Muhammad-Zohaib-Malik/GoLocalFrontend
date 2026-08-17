@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useContext } from "react";
 
 import {
   FaLocationArrow,
@@ -15,11 +15,14 @@ import DynamicGallery from "./components/DynamicGallery";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 
 import axiosClient from "../../api/axiosClient";
+import { UserContext } from "../../UserContext";
 
 export default function EventPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [userRole, setUserRole] = useState(null);
+  
+  const { user, isLoading: userLoading } = useContext(UserContext);
+  const userRole = user?.role || null;
 
   const [loading, setLoading] = useState(true);
   const [eventData, setEventData] = useState(null);
@@ -46,19 +49,6 @@ export default function EventPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    const fetchRole = async () => {
-      try {
-        const response = await axiosClient.get("/users/getUser");
-        setUserRole(response.data.data.role);
-      } catch (error) {
-        setUserRole(null);
-      }
-    };
-
-    if (document.cookie.includes("accessToken=")) {
-      fetchRole();
-    }
   }, []);
 
   useEffect(() => {
@@ -134,7 +124,7 @@ export default function EventPage() {
     }
   };
 
-  if (loading) {
+  if (loading || userLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <LoadingScreen />
