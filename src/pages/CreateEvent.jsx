@@ -13,29 +13,31 @@ const EventForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(() => {
     const savedData = localStorage.getItem("eventForm");
-    return savedData
-      ? JSON.parse(savedData)
-      : {
-          name: "",
-          venue: "",
-          address: "",
-          desc: "",
-          vipPrice: "",
-          vipSize: "",
-          economySize: "",
-          economyPrice: "",
-          currency: "",
-          photo: null,
-          eventDate: "",
-          eventDate2: "",
-          category: "",
-          paymentMethod: "",
-        };
+    const parsedData = savedData ? JSON.parse(savedData) : null;
+    
+    return {
+      name: "",
+      venue: "",
+      address: "",
+      desc: "",
+      vipPrice: "",
+      vipSize: "",
+      economySize: "",
+      economyPrice: "",
+      currency: "",
+      eventDate: "",
+      eventDate2: "",
+      category: "",
+      paymentMethod: "",
+      ...parsedData,
+      photo: null, // Files cannot be stored in localStorage
+    };
   });
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("eventForm", JSON.stringify(formData));
+    const { photo, ...dataToSave } = formData;
+    localStorage.setItem("eventForm", JSON.stringify(dataToSave));
   }, [formData]);
 
   const handleChange = (e) => {
