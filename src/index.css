@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #09090b;
+  --color-primary: #18181b;
+  --color-secondary: #f4f4f5;
+  --color-primarydark: #000000;
+  --color-primarylight: #e4e4e7;
+  --color-accent: #e11d48; /* Vibrant rose for accents */
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ensure all buttons show a hand cursor on hover */
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  cursor: pointer;
+}
