@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdEventSeat } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import axiosClient from "../../../../api/axiosClient";
+import axiosClient from "../../../api/axiosClient";
 import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
 
 const SeatMapModal = ({ formData, gallery, template }) => {

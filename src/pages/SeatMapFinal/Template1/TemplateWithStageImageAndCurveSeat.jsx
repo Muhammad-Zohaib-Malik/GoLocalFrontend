@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
-import axiosClient from "../../../../api/axiosClient";
+import axiosClient from "../../../api/axiosClient";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdEventSeat } from "react-icons/md";
 import { useNavigate } from "react-router-dom";

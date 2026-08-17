@@ -15,6 +15,7 @@ const SearchBar = ({ setEvents }) => {
 
   const BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
+  const fetchAllEvents = async () => {
     try {
       const response = await axiosClient.get("/events/getAllEvents");
       setEvents(response.data.data);
