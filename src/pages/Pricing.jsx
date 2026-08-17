@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { UserContext } from "../UserContext";
 
 const plans = [
   {
@@ -65,14 +66,14 @@ const CheckIcon = ({ className }) => (
 
 export default function Pricing() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const handlePlanClick = () => {
-    const isAuthenticated = document.cookie.includes("accessToken=");
-    if (isAuthenticated) {
+    if (user) {
       navigate("/create-event");
     } else {
       toast.error("Please login first");
