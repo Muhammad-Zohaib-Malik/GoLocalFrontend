@@ -9,7 +9,7 @@ import Experience from "../ComponentsHome/Experience/Experience.jsx";
 import Testimonials from "../ComponentsHome/Testimonials/Testimonials.jsx";
 
 import EventCategories from "../ComponentsHome/EventsCategories/EventCategories.jsx";
-import axios from "axios";
+import axiosClient from "../api/axiosClient";
 import FeaturedEventsList from "../ComponentsHome/FeaturedEvents/FeaturedEventsList.jsx";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen.jsx";
 import { UserContext } from "../UserContext";
@@ -22,8 +22,6 @@ const Home = () => {
     // Scroll to the top of the page when the component mounts
     window.scrollTo(0, 0);
   }, []);
-
-
 
   // GSAP Scroll Animations
   import("gsap").then((gsapModule) => {
@@ -73,14 +71,10 @@ const Home = () => {
       // Determine the appropriate URL based on the user role
       const url =
         userRole === "organizer"
-          ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getuserEvent`
-          : `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getAllEvents`;
+          ? `/events/getuserEvent`
+          : `/events/getAllEvents`;
       try {
-        const response = await axios.get(url, {
-          headers: {
-            
-          },
-        });
+        const response = await axiosClient.get(url);
         setEvents(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -162,4 +156,3 @@ const Home = () => {
 };
 
 export default Home;
-

@@ -10,7 +10,6 @@ import {
   FaTicketAlt,
 } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import Swal from "sweetalert2";
 import DynamicGallery from "./components/DynamicGallery";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
@@ -28,13 +27,10 @@ export default function EventPage() {
 
   const fetchEventData = useMemo(() => {
     return async () => {
-      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getsingleEvent?id=${id}`;
       try {
-        const response = await axios.get(url, {
-          headers: {
-            
-          },
-        });
+        const response = await axiosClient.get(
+          `/events/getsingleEvent?id=${id}`,
+        );
         setEventData(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -69,13 +65,8 @@ export default function EventPage() {
     if (eventData?._id && userRole !== "user") {
       const fetchPayments = async () => {
         try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/booking/geteventbooking?event_id=${eventData._id}`,
-            {
-              headers: {
-                
-              },
-            },
+          const response = await axiosClient.get(
+            `/booking/geteventbooking?event_id=${eventData._id}`,
           );
           setPayments(response.data.data);
         } catch (error) {
@@ -333,4 +324,3 @@ export default function EventPage() {
     </>
   );
 }
-

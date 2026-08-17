@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { useLocation, Outlet } from "react-router-dom";
-
-import { useLocation, Outlet } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 
 const Layout = () => {

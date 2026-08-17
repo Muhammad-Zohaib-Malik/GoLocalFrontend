@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import EventCard from "../EventCard/EventCard";
-import axios from "axios";
+import axiosClient from "../../api/axiosClient";
 import Swal from "sweetalert2";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -17,14 +17,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
 
   const fetchAllEvents = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getAllEvents`,
-        {
-          headers: {
-            
-          },
-        },
-      );
+      const response = await axiosClient.get("/events/getAllEvents");
       setEvents(response.data.data);
     } catch (error) {
       console.error("Error fetching events:", error);
@@ -33,15 +26,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
 
   const handlePublish = async (eventId) => {
     try {
-      await axios.patch(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/publishedEvent`,
-        { eventId },
-        {
-          headers: {
-            
-          },
-        },
-      );
+      await axiosClient.patch("/events/publishedEvent", { eventId });
       await fetchAllEvents();
     } catch (error) {
       console.error("Error publishing event:", error);
@@ -50,15 +35,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
 
   const handleFeature = async (eventId) => {
     try {
-      await axios.patch(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/featuredEvent`,
-        { eventId },
-        {
-          headers: {
-            
-          },
-        },
-      );
+      await axiosClient.patch("/events/featuredEvent", { eventId });
       await fetchAllEvents(eventId);
     } catch (error) {
       console.error("Error featuring event:", error);
@@ -88,14 +65,9 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
       name: updatedEvent?.name,
     };
     try {
-      await axios.put(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/updateEvent?id=${selectedEvent._id}`,
+      await axiosClient.put(
+        `/events/updateEvent?id=${selectedEvent._id}`,
         payload,
-        {
-          headers: {
-            
-          },
-        },
       );
       await fetchAllEvents();
       handleClose();
@@ -118,14 +90,7 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(
-          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/deleteEvent?id=${eventId}`,
-          {
-            headers: {
-              
-            },
-          },
-        );
+        await axiosClient.delete(`/events/deleteEvent?id=${eventId}`);
 
         Swal.fire({
           title: "Eliminated!",
@@ -500,4 +465,3 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
 };
 
 export default FeaturedEventsList;
-

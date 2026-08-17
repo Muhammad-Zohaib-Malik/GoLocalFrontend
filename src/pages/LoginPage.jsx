@@ -26,11 +26,11 @@ const SignIn = () => {
 
       const data = response.data;
       console.log("User signed in successfully:", data);
-      
+
       if (setUser) {
         setUser(data?.data?.user || data?.data || data?.user || null);
       }
-      
+
       navigate("/home");
     } catch (error) {
       console.log("Request failed:", error);
@@ -201,4 +201,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosClient from "../../api/axiosClient";
 import { useEffect, useState, useContext } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -37,15 +37,7 @@ export default function OrderSummary() {
     };
     console.log(payloadData);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/booking/stripe`,
-        payloadData,
-        {
-          headers: {
-            
-          },
-        },
-      );
+      const response = await axiosClient.post("/booking/stripe", payloadData);
       console.log(response);
       if (response.data && response.data.stripeUrl) {
         window.location.href = response.data.stripeUrl;
@@ -196,4 +188,3 @@ export default function OrderSummary() {
     </div>
   );
 }
-

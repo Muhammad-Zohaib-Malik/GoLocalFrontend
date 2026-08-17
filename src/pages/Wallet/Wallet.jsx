@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import axiosClient from "../../api/axiosClient";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 
@@ -8,17 +8,11 @@ const Wallet = () => {
   const [payments, setPayments] = useState([]);
   const { user } = useContext(UserContext);
 
-
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/booking/getuserbooking?user_id=${user?._id}`,
-          {
-            headers: {
-              
-            },
-          },
+        const response = await axiosClient.get(
+          `/booking/getuserbooking?user_id=${user?._id}`,
         );
         setPayments(response.data.data);
       } catch (error) {
@@ -130,4 +124,3 @@ const Wallet = () => {
 };
 
 export default Wallet;
-

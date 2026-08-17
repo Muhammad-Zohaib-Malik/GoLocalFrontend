@@ -27,7 +27,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-
   const dropdownRef = useRef(null);
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,8 +50,6 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -75,9 +72,7 @@ const Header = () => {
         "/auth/logout",
         {},
         {
-          headers: {
-            
-          },
+          headers: {},
         },
       );
     } catch (err) {
@@ -228,4 +223,3 @@ const Header = () => {
 };
 
 export default Header;
-

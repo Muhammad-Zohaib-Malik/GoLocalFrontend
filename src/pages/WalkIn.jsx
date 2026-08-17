@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosClient from "../api/axiosClient";
 import EventCard from "../ComponentsHome/EventCard/EventCard";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 
@@ -14,13 +14,8 @@ const WalkIn = () => {
 
   useEffect(() => {
     const fetchAllEvents = async () => {
-      const url = `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/walk-in`;
       try {
-        const response = await axios.get(url, {
-          headers: {
-            
-          },
-        });
+        const response = await axiosClient.get("/events/walk-in");
         setEvents(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -83,4 +78,3 @@ const WalkIn = () => {
 };
 
 export default WalkIn;
-

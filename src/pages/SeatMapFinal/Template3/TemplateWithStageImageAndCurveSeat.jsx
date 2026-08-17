@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdEventSeat } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosClient from "../../../../api/axiosClient";
 import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
 
 const SeatMapModal = ({ formData, gallery, template }) => {
@@ -85,13 +85,12 @@ const SeatMapModal = ({ formData, gallery, template }) => {
     setIsLoading(true); // Set loading state to true when request starts
     try {
       // Make the API request using Axios
-      const response = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/createEvent`,
+      const response = await axiosClient.post(
+        "/events/createEvent",
         formDataPayload,
         {
           headers: {
             "Content-Type": "multipart/form-data", // Adjust header for FormData
-            
           },
         },
       );
@@ -214,4 +213,3 @@ const SeatMapModal = ({ formData, gallery, template }) => {
 };
 
 export default SeatMapModal;
-

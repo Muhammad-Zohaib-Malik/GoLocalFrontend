@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import SearchBar from "../ComponentsHome/SearchBarEvents/SearchBar";
 import FeaturedEventsList from "../ComponentsHome/FeaturedEvents/FeaturedEventsList";
-import axios from "axios";
+import axiosClient from "../api/axiosClient";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import { UserContext } from "../UserContext";
 
@@ -23,14 +23,10 @@ const Events = () => {
       // Determine the appropriate URL based on the user role
       const url =
         userRole === "organizer"
-          ? `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getuserEvent`
-          : `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/events/getAllEvents`;
+          ? `/events/getuserEvent`
+          : `/events/getAllEvents`;
       try {
-        const response = await axios.get(url, {
-          headers: {
-            
-          },
-        });
+        const response = await axiosClient.get(url);
         setEvents(response.data.data);
         setLoading(false);
       } catch (error) {
@@ -76,4 +72,3 @@ const Events = () => {
 };
 
 export default Events;
-

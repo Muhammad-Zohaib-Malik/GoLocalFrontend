@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
+import axiosClient from "../../api/axiosClient";
 import { FaSearch, FaTimes } from "react-icons/fa";
 
 const SearchBar = ({ setEvents }) => {
@@ -15,16 +15,8 @@ const SearchBar = ({ setEvents }) => {
 
   const BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
-  const fetchAllEvents = async () => {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/v1/events/getAllEvents`,
-        {
-          headers: {
-            
-          },
-        },
-      );
+      const response = await axiosClient.get("/events/getAllEvents");
       setEvents(response.data.data);
     } catch (error) {
       console.error("Error fetching all events:", error);
@@ -42,13 +34,8 @@ const SearchBar = ({ setEvents }) => {
     }
 
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/v1/events/search/getEventBySearch?name=${value}`,
-        {
-          headers: {
-            
-          },
-        },
+      const response = await axiosClient.get(
+        `/events/search/getEventBySearch?name=${value}`
       );
       const suggestions = response.data.data.map((event) => event.name);
       setEventSuggestions([...new Set(suggestions)]);
@@ -88,13 +75,8 @@ const SearchBar = ({ setEvents }) => {
       );
 
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/v1/events/search/getEventBySearch?${queryParams.toString()}`,
-        {
-          headers: {
-            
-          },
-        },
+      const response = await axiosClient.get(
+        `/events/search/getEventBySearch?${queryParams.toString()}`
       );
       setEvents(response.data.data);
     } catch (error) {
