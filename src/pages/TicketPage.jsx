@@ -122,7 +122,7 @@ export default function TicketPage() {
                       Price:{" "}
                       <span className="font-extrabold text-primarydark">
                         {" "}
-                        Rs. {ticket.ticketDetails.ticketprice}
+                        {ticket.ticketDetails.currency || "Rs."} {ticket.ticketDetails.ticketprice}
                       </span>
                     </div>
                     <div>

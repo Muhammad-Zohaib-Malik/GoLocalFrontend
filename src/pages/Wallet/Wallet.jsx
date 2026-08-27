@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import QRCode from "qrcode";
 import axiosClient from "../../api/axiosClient";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../../UserContext";
@@ -14,7 +15,34 @@ const Wallet = () => {
         const response = await axiosClient.get(
           `/booking/getuserbooking?user_id=${user?._id}`,
         );
-        setPayments(response.data.data);
+        const paymentsData = response.data.data || [];
+        
+        const processedPayments = await Promise.all(
+          paymentsData.map(async (payment) => {
+            let qrCodeImage = payment.qrCodeUrl;
+            if (payment.qrCodeUrl) {
+              try {
+                // Try to parse if it's a JSON string
+                const parsed = JSON.parse(payment.qrCodeUrl);
+                if (parsed && parsed.data) {
+                  // Extract the .data property and generate QR code
+                  qrCodeImage = await QRCode.toDataURL(parsed.data);
+                }
+              } catch (e) {
+                // If parsing fails, check if it's not already a data URL or HTTP URL, then generate QR
+                if (!payment.qrCodeUrl.startsWith("http") && !payment.qrCodeUrl.startsWith("data:")) {
+                  try {
+                    qrCodeImage = await QRCode.toDataURL(payment.qrCodeUrl);
+                  } catch (err) {
+                    console.error("Error generating QR code:", err);
+                  }
+                }
+              }
+            }
+            return { ...payment, qrCodeImage };
+          })
+        );
+        setPayments(processedPayments);
       } catch (error) {
         console.error("Error fetching payments:", error);
       }
@@ -85,9 +113,9 @@ const Wallet = () => {
               </div>
 
               <div className="flex justify-center items-center mt-6">
-                {payment.qrCodeUrl ? (
+                {payment.qrCodeImage ? (
                   <img
-                    src={payment.qrCodeUrl}
+                    src={payment.qrCodeImage}
                     alt="QR Code"
                     className="w-[100px] h-[100px] object-cover border p-1 rounded bg-white"
                   />
@@ -103,9 +131,9 @@ const Wallet = () => {
               <button
                 className="w-full bg-[#1976d2] hover:bg-[#115293] text-white font-medium py-2 px-4 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() =>
-                  payment.qrCodeUrl && window.open(payment.qrCodeUrl, "_blank")
+                  payment.qrCodeImage && window.open(payment.qrCodeImage, "_blank")
                 }
-                disabled={!payment.qrCodeUrl}
+                disabled={!payment.qrCodeImage}
               >
                 View QR code
               </button>

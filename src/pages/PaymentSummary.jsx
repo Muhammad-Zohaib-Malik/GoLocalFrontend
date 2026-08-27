@@ -26,6 +26,7 @@ export default function PaymentSummary() {
       eventdate: "",
       eventtime: "",
       ticketprice: "",
+      currency: "",
       qr: "",
     },
   };
@@ -59,6 +60,7 @@ export default function PaymentSummary() {
             eventdate: response.data.eventDate.split("T")[0],
             eventtime: response.data.eventTime,
             ticketprice: response.data.ticketPrice,
+            currency: response.data.currency,
           },
         }));
       })
@@ -252,7 +254,7 @@ export default function PaymentSummary() {
           </div>
           <div className="float-right">
             <p className="text-sm font-semibold pb-2 pt-8">
-              Total : LKR. {event.ticketPrice}
+              Total : {event.currency} {event.ticketPrice}
             </p>
             <Link to={"/"}>
               <button type="button" onClick={createTicket} className="primary">
@@ -272,7 +274,7 @@ export default function PaymentSummary() {
           <p className="text-xs">{event.eventDate.split("T")[0]},</p>
           <p className="text-xs pb-2"> {event.eventTime}</p>
           <hr className=" my-2 border-t pt-2 border-gray-400" />
-          <p className="float-right font-bold">LKR. {event.ticketPrice}</p>
+          <p className="float-right font-bold">{event.currency} {event.ticketPrice}</p>
           <p className="font-bold">Sub total: {event.ticketPrice}</p>
         </div>
       </div>
