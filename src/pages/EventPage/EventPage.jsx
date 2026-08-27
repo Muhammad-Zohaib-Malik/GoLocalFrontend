@@ -20,7 +20,7 @@ import { UserContext } from "../../UserContext";
 export default function EventPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  
+
   const { user, isLoading: userLoading } = useContext(UserContext);
   const userRole = user?.role || null;
 

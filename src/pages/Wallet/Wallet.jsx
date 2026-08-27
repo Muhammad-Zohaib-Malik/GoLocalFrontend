@@ -70,7 +70,7 @@ const Wallet = () => {
                   <strong className="font-semibold text-gray-900">
                     Total Price:
                   </strong>{" "}
-                  ${payment.totalPrice}
+                  {payment.totalPrice} {payment.event_id?.currency}
                 </p>
                 <p>
                   <strong className="font-semibold text-gray-900">
