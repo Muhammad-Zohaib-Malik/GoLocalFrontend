@@ -137,14 +137,14 @@ const SeatMapPage = ({ event }) => {
           <div className="flex items-center mr-5">
             <div className="w-5 h-5 bg-[#ff0e0e] rounded-full"></div>
             <span className="bg-black ml-[10px] text-white">
-              VIP Seat ${vipPrice}
+              VIP Seat {event?.currency ? `${event.currency} ` : "PKR "}{vipPrice}
             </span>
           </div>
 
           <div className="flex items-center">
             <div className="w-5 h-5 bg-[#3960ba] rounded-full"></div>
             <span className="bg-black ml-[10px] text-white">
-              Economy Seat ${economyPrice}
+              Economy Seat {event?.currency ? `${event.currency} ` : "PKR "}{economyPrice}
             </span>
           </div>
         </div>
@@ -183,7 +183,7 @@ const SeatMapPage = ({ event }) => {
             onClick={handleConfirmBooking}
             className="w-full bg-[#4CAF50] hover:bg-[#3e8e41] text-white p-[15px] text-center text-[16px] font-bold rounded-[10px] cursor-pointer mt-[15px] transition-colors"
           >
-            Confirm Booking - ${calculateTotalPrice()}
+            Confirm Booking - {event?.currency ? `${event.currency} ` : "PKR "}{calculateTotalPrice()}
           </button>
         </div>
       </div>

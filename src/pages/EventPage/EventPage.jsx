@@ -290,7 +290,7 @@ export default function EventPage() {
                           <strong className="font-semibold">
                             Total price:
                           </strong>{" "}
-                          ${payment.totalPrice}
+                          {payment?.currency ? `${payment.currency} ` : "PKR "}{payment.totalPrice}
                         </p>
                         <p>
                           <strong className="font-semibold">

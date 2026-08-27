@@ -216,12 +216,12 @@ const SeatMapModal = ({ event }) => {
         <div className="flex justify-center mb-5 flex-wrap gap-4">
           <div className="flex items-center mr-5">
             <div className="w-5 h-5 bg-[#ff0e0e] rounded-full"></div>
-            <span className="ml-2">VIP Seat ${vipPrice}</span>
+            <span className="ml-2">VIP Seat {event?.currency ? `${event.currency} ` : "PKR "}{vipPrice}</span>
           </div>
 
           <div className="flex items-center">
             <div className="w-5 h-5 bg-[#3960ba] rounded-full"></div>
-            <span className="ml-2">Economy Seat ${economyPrice}</span>
+            <span className="ml-2">Economy Seat {event?.currency ? `${event.currency} ` : "PKR "}{economyPrice}</span>
           </div>
         </div>
 
@@ -285,7 +285,7 @@ const SeatMapModal = ({ event }) => {
             onClick={handleConfirmBooking}
             className="w-full bg-[#4CAF50] hover:bg-[#3e8e41] text-white p-[15px] text-center text-[16px] font-bold rounded-[10px] cursor-pointer mt-[15px] transition-colors"
           >
-            Confirm Booking - ${calculateTotalPrice()}
+            Confirm Booking - {event?.currency ? `${event.currency} ` : "PKR "}{calculateTotalPrice()}
           </button>
         </div>
       </div>
