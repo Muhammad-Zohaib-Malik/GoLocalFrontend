@@ -120,7 +120,7 @@ const SeatMapModal = ({ open, handleClose, event }) => {
           <h4 className="text-2xl text-center text-black bg-white p-2 rounded-xl mb-6">
             Seat Picker{" "}
             <span className="italic text-[15px] font-normal">
-              (VIP Price: ${vipPrice} | Economy Price: ${economyPrice})
+              (VIP Price: {event?.currency ? `${event.currency} ` : "PKR "}{vipPrice} | Economy Price: {event?.currency ? `${event.currency} ` : "PKR "}{economyPrice})
             </span>
           </h4>
 
@@ -150,7 +150,7 @@ const SeatMapModal = ({ open, handleClose, event }) => {
             {/* Total Price */}
             <div className="p-[10px] bg-white/80 text-black rounded-md shadow-sm">
               <h6 className="font-semibold text-lg">Total Price</h6>
-              <p className="mt-1 font-medium">${calculateTotalPrice()}</p>
+              <p className="mt-1 font-medium">{event?.currency ? `${event.currency} ` : "PKR "}{calculateTotalPrice()}</p>
             </div>
 
             {/* Confirm Button */}

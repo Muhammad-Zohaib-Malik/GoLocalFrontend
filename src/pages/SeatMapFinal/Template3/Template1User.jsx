@@ -178,7 +178,7 @@ const FinalSeatMapWithDynamicSections = ({ event, selectionDate }) => {
         {/* Total Price */}
         <div className="p-[10px] bg-white/80 text-black text-center rounded w-full">
           <h6 className="text-lg font-bold">Total price</h6>
-          <p className="text-xl font-semibold">${calculateTotalPrice()}</p>
+          <p className="text-xl font-semibold">{event?.currency ? `${event.currency} ` : "PKR "}{calculateTotalPrice()}</p>
         </div>
 
         {/* Confirm Booking */}
