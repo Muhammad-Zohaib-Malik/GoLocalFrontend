@@ -70,8 +70,6 @@ import PrivateRoute from "./PrivateRoute";
 import SeatMapPage from "../pages/SeatMapPage/SeatMapPage";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
-import Pricing from "../pages/Pricing";
-import Pricingg from "../pages/Pricingg";
 
 import WalkIn from "../pages/WalkIn";
 import SeatMapModal from "../pages/SeatMapPage/SeatMapPage";
@@ -156,11 +154,6 @@ const Routers = () => {
           path="/seatMap"
           element={<PrivateRoute element={<SeatMapPage />} />}
         />
-        <Route
-          path="/pricing"
-          element={<PrivateRoute element={<Pricing />} />}
-        />
-        <Route path="/pricingg" element={<Pricingg />} />
         <Route
           path="/event/ordersummary"
           element={<PrivateRoute element={<OrderSummary />} />}

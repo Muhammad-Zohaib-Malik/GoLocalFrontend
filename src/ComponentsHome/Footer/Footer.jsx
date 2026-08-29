@@ -12,7 +12,6 @@ const quick__links = [
   { path: "/home", display: "Home" },
   { path: "/about", display: "About Us" },
   { path: "/events", display: "All Events" },
-  { path: "/pricing", display: "Pricing" },
 ];
 
 const discover__links = [

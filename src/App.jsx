@@ -21,7 +21,6 @@ import PrivateRoute from "./router/PrivateRoute";
 import SeatMapPage from "./pages/SeatMapPage/SeatMapPage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import Pricing from "./pages/Pricing";
 import WalkIn from "./pages/WalkIn";
 import OrganizorMapPage from "./pages/OrganizerMap/OrganizorMapPage";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -61,7 +60,6 @@ const router = createBrowserRouter(
           path: "seatMap",
           element: <PrivateRoute element={<SeatMapPage />} />,
         },
-        { path: "pricing", element: <Pricing /> },
         {
           path: "event/ordersummary",
           element: <PrivateRoute element={<OrderSummary />} />,

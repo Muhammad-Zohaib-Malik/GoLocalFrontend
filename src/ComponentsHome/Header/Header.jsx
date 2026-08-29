@@ -12,7 +12,6 @@ const nav__links = [
   { path: "/home", display: "Home" },
   { path: "/events", display: "Events" },
   { path: "/about", display: "About Us" },
-  { path: "/pricing", display: "Pricing" },
   { path: "/contact", display: "Contact" },
   { path: "/walk-in-events", display: "Walk-In" },
 ];
@@ -149,7 +148,7 @@ const Header = () => {
         {isAuthenticated ? (
           <>
             {user?.role === "organizer" && (
-              <Link to="/pricing">
+              <Link to="/create-event">
                 <button className="px-5 py-2 rounded-full font-semibold text-sm bg-black text-white hover:bg-gray-800 shadow-md transition-all duration-300">
                   {isMobile ? "Add Event" : "Create Event"}
                 </button>
