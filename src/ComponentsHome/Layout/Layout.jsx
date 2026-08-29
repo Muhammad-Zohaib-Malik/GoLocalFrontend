@@ -16,7 +16,7 @@ const Layout = () => {
     location.pathname.includes("congrtspaymentsuccess");
 
   const isHomeWithHero =
-    (location.pathname === "/home" || location.pathname === "/") &&
+    (location.pathname === "/") &&
     (!user || user?.role === "user");
   const isEventsPage = location.pathname === "/events";
   const isAboutPage = location.pathname === "/about";

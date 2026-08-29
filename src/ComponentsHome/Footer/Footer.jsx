@@ -9,7 +9,7 @@ import {
 import { RiMapPin2Line, RiPhoneLine, RiMailLine } from "react-icons/ri";
 
 const quick__links = [
-  { path: "/home", display: "Home" },
+  { path: "/", display: "Home" },
   { path: "/about", display: "About Us" },
   { path: "/events", display: "All Events" },
 ];

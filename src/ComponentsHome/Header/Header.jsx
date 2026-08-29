@@ -9,7 +9,7 @@ import axiosClient from "../../api/axiosClient";
 import { UserContext } from "../../UserContext";
 
 const nav__links = [
-  { path: "/home", display: "Home" },
+  { path: "/", display: "Home" },
   { path: "/events", display: "Events" },
   { path: "/about", display: "About Us" },
   { path: "/contact", display: "Contact" },
@@ -83,7 +83,7 @@ const Header = () => {
   };
 
   const isHomeWithHero =
-    (location.pathname === "/home" || location.pathname === "/") &&
+    (location.pathname === "/") &&
     (!user || user?.role === "user");
   const isEventsPage = location.pathname === "/events";
   const isAboutPage = location.pathname === "/about";
@@ -107,11 +107,13 @@ const Header = () => {
       {/* Logo */}
       {!isMobile && (
         <div className="shrink">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-20 w-[100px] object-contain"
-          />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-20 w-[100px] object-contain"
+            />
+          </Link>
         </div>
       )}
 

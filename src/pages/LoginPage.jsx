@@ -31,7 +31,7 @@ const SignIn = () => {
         setUser(data?.data?.user || data?.data || data?.user || null);
       }
 
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.log("Request failed:", error);
     } finally {
@@ -44,7 +44,7 @@ const SignIn = () => {
   }, []);
 
   if (user) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return (

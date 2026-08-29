@@ -142,8 +142,7 @@ const Routers = () => {
         {/* <Route path="/" element={<Navigate to="/CreateEvent" />} />
  <Route path="/create-event" element={<CreateEvent/> } /> */}
         create-event
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/create-event"
           element={<PrivateRoute element={<CreateEvent />} />}
