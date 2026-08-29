@@ -68,7 +68,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await axiosClient.post(
-        "/auth/logout",
+        "/users/logout",
         {},
         {
           headers: {},
