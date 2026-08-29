@@ -1,9 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useRef, useState, useEffect, useContext } from "react";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import axiosClient from "../api/axiosClient";
 import toast from "react-hot-toast";
 import authImage from "../assets/event_auth_image.png";
+import { UserContext } from "../UserContext";
 
 const SignUp = () => {
   const userNameRef = useRef();
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,10 @@ const SignUp = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (user) {
+    return <Navigate to="/home" replace />;
+  }
 
   return (
     <div className="flex flex-1 w-full font-sans bg-gray-50 overflow-hidden">

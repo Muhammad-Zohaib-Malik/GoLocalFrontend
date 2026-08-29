@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
 import axiosClient from "../api/axiosClient";
 import authImage from "../assets/event_auth_image.png";
@@ -10,7 +10,7 @@ const SignIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +42,10 @@ const SignIn = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (user) {
+    return <Navigate to="/home" replace />;
+  }
 
   return (
     <div className="flex flex-col flex-1 w-full font-sans bg-gray-50 overflow-hidden">
