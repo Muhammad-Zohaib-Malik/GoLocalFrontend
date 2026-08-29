@@ -26,13 +26,6 @@ const EventCard = ({ event, onPublish, onFeature, onDelete, onUpdate }) => {
   const { user } = useContext(UserContext);
   const userRole = user?.role;
 
-  const categoryTranslations = {
-    Música: "Music",
-    Deportes: "Sports",
-    Conferencia: "Conference",
-    Taller: "Workshop",
-    Teatro: "Theater",
-  };
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-300 flex flex-col h-full group hover:-translate-y-1">
@@ -71,7 +64,7 @@ const EventCard = ({ event, onPublish, onFeature, onDelete, onUpdate }) => {
         {category && (
           <div className="absolute bottom-4 left-4">
             <span className="bg-black/50 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1 border border-white/10">
-              <BiCategory /> {categoryTranslations[category] || category}
+              <BiCategory /> {category}
             </span>
           </div>
         )}

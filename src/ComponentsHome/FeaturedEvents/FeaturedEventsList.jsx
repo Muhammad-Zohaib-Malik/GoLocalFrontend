@@ -404,11 +404,11 @@ const FeaturedEventsList = ({ events, loading, setEvents }) => {
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[#3795d6]"
                 >
-                  <option value="Música">Music</option>
-                  <option value="Deportes">Sports</option>
-                  <option value="Conferencia">Conferences</option>
-                  <option value="Taller">Technology</option>
-                  <option value="Teatro">Theater</option>
+                  <option value="Music">Music</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Conferences">Conferences</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Theater">Theater</option>
                 </select>
               </div>
 

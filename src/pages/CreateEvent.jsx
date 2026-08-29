@@ -139,11 +139,11 @@ const EventForm = () => {
                   <option value="" disabled>
                     Select Category
                   </option>
-                  <option value="Música">Music</option>
-                  <option value="Deportes">Sports</option>
-                  <option value="Conferencia">Conference</option>
-                  <option value="Taller">Technology</option>
-                  <option value="Teatro">Theater</option>
+                  <option value="Music">Music</option>
+                  <option value="Sports">Sports</option>
+                  <option value="Conference">Conference</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Theater">Theater</option>
                 </select>
               </div>
               <div className="flex flex-col">
